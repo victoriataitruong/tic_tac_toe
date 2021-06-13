@@ -1,3 +1,4 @@
+# importing libraries 
 import pygame as pg,sys
 from pygame.locals import *
 import time
@@ -31,7 +32,7 @@ x_img = pg.transform.scale(x_img, (80,80))
 o_img = pg.transform.scale(o_img, (80,80))
 opening = pg.transform.scale(opening, (width, height+100))
 
-
+# opening game
 def game_opening():
     screen.blit(opening,(0,0))
     pg.display.update()
@@ -41,22 +42,20 @@ def game_opening():
     # Drawing vertical lines
     pg.draw.line(screen,line_color,(width/3,0),(width/3, height),7)
     pg.draw.line(screen,line_color,(width/3*2,0),(width/3*2, height),7)
+
     # Drawing horizontal lines
     pg.draw.line(screen,line_color,(0,height/3),(width, height/3),7)
     pg.draw.line(screen,line_color,(0,height/3*2),(width, height/3*2),7)
     draw_status()
     
-
 def draw_status():
     global draw
-
     if winner is None:
         message = XO.upper() + "'s Turn"
     else:
         message = winner.upper() + " won!"
     if draw:
         message = 'Game Draw!'
-
     font = pg.font.Font(None, 30)
     text = font.render(message, 1, (255, 255, 255))
 
@@ -104,7 +103,6 @@ def check_win():
         draw = True
     draw_status()
 
-
 def drawXO(row,col):
     global TTT,XO
     if row==1:
@@ -131,8 +129,6 @@ def drawXO(row,col):
     #print(posx,posy)
     #print(TTT)
    
-    
-
 def userClick():
     #get coordinates of mouse click
     x,y = pg.mouse.get_pos()
@@ -158,7 +154,6 @@ def userClick():
         row = None
     #print(row,col)
     
-
     if(row and col and TTT[row-1][col-1] is None):
         global XO
         
@@ -166,8 +161,6 @@ def userClick():
         drawXO(row,col)
         check_win()
         
-        
-
 def reset_game():
     global TTT, winner,XO, draw
     time.sleep(3)
@@ -179,7 +172,6 @@ def reset_game():
     
 
 game_opening()
-
 # run the game loop forever
 while(True):
     for event in pg.event.get():
